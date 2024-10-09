@@ -1,0 +1,94 @@
+.grid{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    width: 100%;
+    max-width: 1000px;
+    min-width: 400px;
+    margin: 24px auto;
+    gap: 25px;
+    
+}
+
+body{
+    background: linear-gradient(180deg, #F62668 5.95%, #9C0540 100%);
+    height: 100vh;
+}
+
+.header-container {
+    display: flex;
+    gap: 500px;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+h1{
+    font-size: 32px;
+    font-weight: bold;
+    color: #fff;
+    font-family: "REM", sans-serif;
+    text-transform :uppercase ;
+   
+}
+
+.header-container img{
+    width: 100%;
+    max-width: 100px;
+}
+
+.time-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.time{
+    background-color: white;
+    padding: .8rem 5rem;
+    border-radius: 25px;
+    transition: 1s ease;
+}
+
+.time:hover{
+    scale:1.1;
+    border: 2px solid black
+}
+
+.card{
+    aspect-ratio: 3/4;
+    width: 100%;
+    
+    transition: all 900ms ease;
+    transform-style: preserve-3d;
+    position: relative;
+}
+.card:hover{
+    scale: 1.1;
+}
+
+.face{
+    background-position: center;
+    background-size: cover;
+    border-radius: 25px;
+    border:solid 2px white;
+    width: 100%;
+    height: 100%;
+    position:absolute;
+}
+
+.back {
+    background-image: url(../Assets/card-back2.png);
+    backface-visibility: hidden;
+
+}
+
+.front{
+    background-color: white;
+    transform: rotateY(180deg);
+}
+.reveal-card {
+    transform: rotateY(180deg);
+}
+
+.disabled-card{
+    filter: saturate(0);
+    opacity: 0.5;
+}
