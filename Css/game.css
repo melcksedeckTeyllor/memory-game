@@ -9,9 +9,9 @@
     
 }
 
-body{
+main {
     background: linear-gradient(180deg, #F62668 5.95%, #9C0540 100%);
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .header-container {
@@ -36,21 +36,27 @@ h1{
 }
 
 .time-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.time{
+    margin: auto;
+   
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   
     background-color: white;
     padding: .8rem 5rem;
     border-radius: 25px;
+    max-width: 700px;
     transition: 1s ease;
 }
 
-.time:hover{
-    scale:1.1;
-    border: 2px solid black
+.time-container span{
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: "REM", sans-serif;
 }
+
+
 
 .card{
     aspect-ratio: 3/4;

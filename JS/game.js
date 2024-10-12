@@ -1,4 +1,6 @@
 const grid = document.querySelector('.grid');
+const spanPlayer = document.querySelector('.player')
+const timer = document.querySelector('.time')
 
 const servicesProducts = [
     'PagamentoAutomatico',
@@ -17,9 +19,11 @@ const servicesProducts = [
 
 let firstCard = '';
 let secondCard = '';
+let lockBoard = false;
 
 const revealCard = ({ target }) => {
-    // Verifica se a carta já está revelada ou desabilitada
+    if (lockBoard) return;
+   
     if (target.parentNode.className.includes('reveal-card') || target.parentNode.className.includes('disabled-card')) {
         return; 
     }
@@ -31,6 +35,7 @@ const revealCard = ({ target }) => {
         firstCard = target.parentNode; 
     } else if (secondCard === '') {
         secondCard = target.parentNode; 
+        lockBoard = true;
         checkCards(); 
     }
 };
@@ -38,15 +43,24 @@ const revealCard = ({ target }) => {
 const checkEndGame = () => {
     const disabledCards = document.querySelectorAll('.disabled-card');
 
-    if(disabledCards === 12) {
-        alert("Parabéns, você conseguiu!")
+    if(disabledCards.length === 12) {
+        clearInterval(this.loop)
+        alert(`Parabéns ${spanPlayer.innerHTML} você conseguiu! Seu tempo foi ${timer.innerHTML}s`)
     }
 }
 
 const checkCards = () => {
+
+    if (!firstCard || !secondCard) return;
+
     const firstService = firstCard.getAttribute('data-servicesProduct');
     const secondService = secondCard.getAttribute('data-servicesProduct');
 
+
+    if (!firstService || !secondService) {
+        Alert('Recomece o jogo, faça jogadas com calma');
+        return;
+    }
     
     if (firstService.replace('Resp', '') === secondService.replace('Resp', '') || secondService.replace('Resp', '') === firstService.replace('Resp', '')) {
         
@@ -68,8 +82,13 @@ const checkCards = () => {
             
             firstCard = '';
             secondCard = '';
-        }, 1000);
+        }, 1000); 
     }
+    setTimeout(() => {
+        firstCard = '';
+        secondCard = '';
+        lockBoard = false;
+    }, 1000);
 };
 
 const createElement = (tag, className) => {
@@ -102,4 +121,16 @@ const loadGame = () => {
     });
 };
 
-loadGame();
+const startTimer = () => {
+    this.loop = setInterval(() => {
+        const currentTime = +timer.innerHTML;
+        timer.innerHTML = currentTime + 1;
+    }, 1000);
+}
+
+window.onload = () => {
+    const playerName = localStorage.getItem('player')
+    spanPlayer.innerHTML = playerName;
+    startTimer();
+    loadGame();
+}
